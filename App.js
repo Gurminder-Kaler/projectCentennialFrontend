@@ -10,12 +10,12 @@ import ForgotPasswordScreen from './app/screens/password/ForgotPasswordScreen';
 import VerifyForgotPasswordOtpScreen from './app/screens/password/VerifyForgotPasswordOtpScreen';
 import LoginScreen from './app/screens/auth/LoginScreen';
 import RegisterScreen from './app/screens/auth/RegisterScreen';
-import AddPatientScreen from './app/screens/patient/AddPatientScreen';
+import AddAPatientScreen from './app/screens/patient/AddAPatientScreen';
 import ViewAllPatientsScreen from './app/screens/patient/ViewAllPatientsScreen';
 import ViewAPatientScreen from './app/screens/patient/ViewAPatientScreen';
 import HomeScreen from './app/screens/HomeScreen';
 import ViewAllTestResultsScreen from './app/screens/test/ViewAllTestResultsScreen';
-import AddATestResultScreen from './app/screens/test/AddTestResultScreen';
+import AddATestResultScreen from './app/screens/test/AddATestResultScreen';
 // import PracticeScreen from './app/screens/practiceScreen';
 
 const App = () => {
@@ -82,7 +82,7 @@ const App = () => {
         <Stack.Screen
           name="addPatientScreen"
           options={isLoggedIn ? { title: 'Add Patient' } : { title: 'Login' }}
-          component={isLoggedIn ? AddPatientScreen : LoginScreen}
+          component={isLoggedIn ? AddAPatientScreen : LoginScreen}
         />
         <Stack.Screen
           name="viewAllPatients"
@@ -96,8 +96,13 @@ const App = () => {
         />
         <Stack.Screen
           name="viewAllTestResultsScreen"
-          options={isLoggedIn ? { title: 'Your all Test' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: 'Patient\'s All tests' } : { title: 'Login' }}
           component={isLoggedIn ? ViewAllTestResultsScreen : LoginScreen}
+        />
+        <Stack.Screen
+          name="addATestResultScreen"
+          options={isLoggedIn ? { title: 'Add a test result' } : { title: 'Login' }}
+          component={isLoggedIn ? AddATestResultScreen : LoginScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

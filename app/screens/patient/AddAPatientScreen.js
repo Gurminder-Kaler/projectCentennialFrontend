@@ -30,24 +30,38 @@ const validationSchema = Yup.object({
   gender: Yup.string().required('Gender is required!')
 });
 
-export const AddTestResultScreen = ({ navigation }) => {
+export const AddAPatientScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
   const formObject = {
-    firstName: 'FirstName 2',
-    lastName: 'lastName 2',
-    gender: 'male',
-    email: 'patient2@yopmail.com',
-    address: 'alskdjas',
-    city: 'askdjasklj',
-    postalCode: 'aksljdaskd',
-    password: '12345678',
-    province: 'ONTARIO',
-    bloodGroup: 'A+',
-    role: 'PATIENT',
+    firstName: '',
+    lastName: '',
+    gender: '',
+    email: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    password: '',
+    province: '',
+    bloodGroup: '',
+    role: '',
     createdBy: auth.user.id,
   };
+  // const formObject = {
+  //   firstName: 'FirstName 2',
+  //   lastName: 'lastName 2',
+  //   gender: 'male',
+  //   email: 'patient2@yopmail.com',
+  //   address: 'alskdjas',
+  //   city: 'askdjasklj',
+  //   postalCode: 'aksljdaskd',
+  //   password: '12345678',
+  //   province: 'ONTARIO',
+  //   bloodGroup: 'A+',
+  //   role: 'PATIENT',
+  //   createdBy: auth.user.id,
+  // };
 
   let performRegister = async values => {
     let payload = {
@@ -289,10 +303,10 @@ const pickerStyle = {
     borderRadius: 5,
   },
   placeholder: {
-    color: 'white',
+    color: 'black',
   },
   inputAndroid: {
-    color: 'white',
+    color: 'black',
     paddingHorizontal: 10,
     backgroundColor: '#ff000090',
     borderRadius: 5,
@@ -302,7 +316,7 @@ const pickerStyle = {
 const styles = StyleSheet.create({
   body: {
     flexGrow: 1,
-    backgroundColor: '#000000',
+    backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'flex-start',
     padding: 16,
@@ -315,7 +329,7 @@ const styles = StyleSheet.create({
     margin: 35,
   },
   label: {
-    color: '#fff',
+    color: '#000',
   },
   error: {
     color: 'tomato',
@@ -330,7 +344,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     padding: 10,
     color: '#000',
-    borderColor: '#fff',
+    borderColor: '#00000040',
     borderWidth: 0.5,
   },
   button: {
@@ -356,4 +370,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddTestResultScreen;
+export default AddAPatientScreen;

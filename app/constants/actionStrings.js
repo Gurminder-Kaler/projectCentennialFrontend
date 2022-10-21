@@ -6,6 +6,7 @@ export const updateAuthUserString = 'UPDATE_AUTH_USER';
 export const signUpString = 'SIGN_UP';
 export const getAPatientsInfo = 'GET_A_PATIENTS_INFO';
 export const getAllPatientsOfAUserString = 'GET_ALL_PATIENTS_OF_A_USER';
+export const getAllTestsOfAPatientString = 'GET_ALL_TEST_OF_A_PATIENT';
 export const getAPatientsInfoString = 'GET_A_PATIENTS_INFO';
 export const otpVerifyString = 'OTP_VERIFY';
 export const updateProfileString = 'UPDATE_PROFILE';

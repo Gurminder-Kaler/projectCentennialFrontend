@@ -1,4 +1,4 @@
-import { loginString, updateAuthUserString, getAllPatientsOfAUserString, logOutString, getAPatientsInfoString } from '../constants/actionStrings';
+import { loginString, updateAuthUserString, getAllTestsOfAPatientString, getAllPatientsOfAUserString, logOutString, getAPatientsInfoString } from '../constants/actionStrings';
 
 export default (state = {}, action) => {
   console.log('Auth reducer', action);
@@ -20,6 +20,11 @@ export default (state = {}, action) => {
       return {
         ...state,
         allPatients: action.payload,
+      };
+    case getAllTestsOfAPatientString:
+      return {
+        ...state,
+        tests: action.payload,
       };
     case getAPatientsInfoString:
       return {
