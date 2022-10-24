@@ -21,7 +21,7 @@ export const getAllTestsOfAPatient = (patientId) => async dispatch => {
 export const addATestResult = (patientData) => async dispatch => {
 
   dispatch({ type: isLoadingString, payload: { loader: true } });
-  const response = await apiRequest(EndPoints.addATestResult, 'PUT', patientData);
+  const response = await apiRequest(EndPoints.addATestResult + `${patientData.id}/tests`, 'PUT', patientData);
 
   dispatch({ type: addATestResultString, payload: response.data });
   dispatch({ type: isLoadingString, payload: { loader: false } });

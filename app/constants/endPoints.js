@@ -6,6 +6,7 @@ const EndPoints = {
   updateProfile: 'users/updateProfile',
   getAPatientsInfo: 'users/patients',
   getAllTestsOfAPatient: 'users/patients',
+  addATestResult: 'users/patients',
   verifyOtp: 'users/verifyOTP',
   sendForgotPasswordOTPEmail: 'users/sendForgotPasswordOTPEmail',
   resendOtp: 'users/signUpResendOtp',
