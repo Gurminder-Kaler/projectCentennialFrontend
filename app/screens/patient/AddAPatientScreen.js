@@ -77,7 +77,10 @@ export const AddAPatientScreen = ({ navigation }) => {
       password: values.password,
       createdBy: auth.user.id
     };
-    await dispatch(registerPatient(payload));
+    const result = await dispatch(registerPatient(payload));
+    if (result == true) {
+      navigation.push('homeScreen');
+    }
   };
 
   return (

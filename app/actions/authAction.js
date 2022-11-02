@@ -66,11 +66,12 @@ export const registerUser = (signUpData) => async dispatch => {
 export const registerPatient = (patientData) => async dispatch => {
 
   dispatch({ type: isLoadingString, payload: { loader: true } });
-  const response = await apiRequest(EndPoints.addPatient, 'PUT', patientData);
+  const response = await apiRequest(EndPoints.addPatient, 'POST', patientData);
 
-  dispatch({ type: registerPatientString, payload: response.data });
   dispatch({ type: isLoadingString, payload: { loader: false } });
+  dispatch({ type: registerPatientString, payload: response.data });
   return response && response.success ? response : false;
+
 };
 
 // ------------------ getAllPatients EndPoint  ----------------------- //
