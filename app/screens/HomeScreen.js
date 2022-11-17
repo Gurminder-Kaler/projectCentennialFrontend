@@ -10,7 +10,7 @@ import {
 import { logoutUser } from '../../app/actions/authAction';
 import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import showSnack from '../utils/ShowSnack';
+import showSnack from '../utils/ShowSnack'; 
 
 export const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -44,25 +44,27 @@ export const HomeScreen = ({ navigation }) => {
     showSnack('See you soon!');
   };
   return (
-    <ScrollView contentContainerStyle={styles.body}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('addPatientScreen')}
-          style={styles.blackBox}>
-          <Text style={styles.label}>Add Patient</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('viewAllPatients')}
-          style={styles.blackBox}>
-          <Text style={styles.label}>View Your Patients</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => showAlert()}
-          style={styles.redBox}>
-          <Text style={styles.label}>Logout</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+    <>
+      <ScrollView contentContainerStyle={styles.body}>
+        <View style={styles.container}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('addPatientScreen')}
+            style={styles.blackBox}>
+            <Text style={styles.label}>Add Patient</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('viewAllPatients')}
+            style={styles.blackBox}>
+            <Text style={styles.label}>View Your Patients</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => showAlert()}
+            style={styles.redBox}>
+            <Text style={styles.label}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </>
   );
 };
 

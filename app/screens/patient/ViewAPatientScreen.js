@@ -10,15 +10,16 @@ import { getAPatientsInfo } from '../../actions/authAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const ViewAPatientScreen = ({ navigation, route }) => {
-  
+
   const dispatch = useDispatch();
   console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah dhjas", route.params);
+  [showAddress, setShowAddress] = useState(false);
   useEffect(() => {
     dispatch(getAPatientsInfo(route.params.patientId));
   }, []);
-  
+
   const state = useSelector((state) => console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah state", state));
-  
+
   const { patient } = useSelector(state => state.auth);
   return (
     <ScrollView contentContainerStyle={styles.body}>
@@ -39,22 +40,36 @@ export const ViewAPatientScreen = ({ navigation, route }) => {
         <View style={styles.inputBox}>
           <Text style={styles.label}>Blood Group:  <Text style={styles.boldText}>{patient ? patient.bloodGroup : ''}</ Text></Text>
         </View>
+        {showAddress ? (
+          <View>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>Address:  <Text style={styles.boldText}>{patient ? patient.address : ''}</ Text></Text>
+            </View>
 
-        <View style={styles.inputBox}>
-          <Text style={styles.label}>Address:  <Text style={styles.boldText}>{patient ? patient.address : ''}</ Text></Text>
-        </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>City:  <Text style={styles.boldText}>{patient ? patient.city : ''}</ Text></Text>
+            </View>
 
-        <View style={styles.inputBox}>
-          <Text style={styles.label}>City:  <Text style={styles.boldText}>{patient ? patient.city : ''}</ Text></Text>
-        </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>Postal Code:  <Text style={styles.boldText}>{patient ? patient.postalCode : ''}</ Text></Text>
+            </View>
 
-        <View style={styles.inputBox}>
-          <Text style={styles.label}>Postal Code:  <Text style={styles.boldText}>{patient ? patient.postalCode : ''}</ Text></Text>
-        </View>
-
-        <View style={styles.inputBox}>
-          <Text style={styles.label}>Province:  <Text style={styles.boldText}>{patient ? patient.province : ''}</ Text></Text>
-        </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>Province:  <Text style={styles.boldText}>{patient ? patient.province : ''}</ Text></Text>
+            </View>
+            <View style={styles.buttonBox}>
+              <TouchableOpacity
+                onPress={() => setShowAddress(false)} style={{ alignContent: 'center' }}>
+                <Text style={styles.buttonAddress}>Hide address</Text>
+              </TouchableOpacity>
+            </View>
+          </View>) :
+          <View style={styles.buttonBox}>
+            <TouchableOpacity
+              onPress={() => setShowAddress(true)}>
+              <Text style={styles.buttonAddress}>View address</Text>
+            </TouchableOpacity>
+          </View>}
 
         <View style={styles.inputBox}>
           <TouchableOpacity
@@ -94,6 +109,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#00000012',
     padding: 12,
   },
+  buttonBox: {
+    margin: 5,
+    backgroundColor: '#00000012',
+    padding: 12,
+    textAlign: 'center',
+  },
   error: {
     color: 'red',
     fontSize: 15,
@@ -127,6 +148,15 @@ const styles = StyleSheet.create({
   buttonT: {
     padding: 10,
     fontSize: 24,
+    backgroundColor: 'black',
+    color: 'white',
+    textAlign: 'center',
+  },
+  buttonAddress: {
+    padding: 10,
+    marginLeft: "15%",
+    fontSize: 19,
+    width: 200,
     backgroundColor: 'black',
     color: 'white',
     textAlign: 'center',

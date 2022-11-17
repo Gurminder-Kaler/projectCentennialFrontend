@@ -25,7 +25,7 @@ let validationSchema = Yup.object({
 
 export const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  let formObject = { email: 'nurse@yopmail.com', password: '12345678' };
+  let formObject = { email: 'gurminder1@yopmail.com', password: '12345678' };
 
   let performLogin = async values => {
     let payload = {
@@ -82,6 +82,7 @@ export const LoginScreen = ({ navigation }) => {
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     autoCapitalize="none"
+                    value={formObject.email}
                     placeholder="Email"
                   />
                   {touched.email && errors.email ? (
@@ -97,6 +98,7 @@ export const LoginScreen = ({ navigation }) => {
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
                     secureTextEntry={true}
+                    value={formObject.password}
                     placeholder="Password"
                   />
                   {touched.password && errors.password ? (

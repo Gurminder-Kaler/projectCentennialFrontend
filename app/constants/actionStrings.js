@@ -14,3 +14,4 @@ export const logOutString = 'LOGOUT';
 export const getScoreViaUserIdString = 'GET_SCORE_VIA_USER_ID';
 export const getAllQuizCategoriesString = 'GET_ALL_QUIZ_CATEGORIES';
 export const getAllQuizViaCategoryIdString = 'GET_ALL_QUIZ_VIA_ID_CATEGORY_ID';
+export const addATestResultString = 'ADD_A_TEST_RESULT_OF_A_PATIENT';

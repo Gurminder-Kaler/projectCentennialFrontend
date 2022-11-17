@@ -101,7 +101,7 @@ export const AddAPatientScreen = ({ navigation }) => {
           setFieldValue,
         }) => {
           return (
-            <>
+            <View style={styles.screenBackground}>
               <View style={styles.inputBox}>
                 <Text style={styles.label}>
                   Enter patient's first name
@@ -291,7 +291,7 @@ export const AddAPatientScreen = ({ navigation }) => {
                   <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
               </View>
-            </>
+            </View>
           );
         }}
       </Formik>
@@ -317,9 +317,13 @@ const pickerStyle = {
 };
 
 const styles = StyleSheet.create({
+  screenBackground: {
+    backgroundColor: 'black',
+    color: 'white'
+  },
   body: {
     flexGrow: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'stretch',
     justifyContent: 'flex-start',
     padding: 16,
@@ -332,7 +336,7 @@ const styles = StyleSheet.create({
     margin: 35,
   },
   label: {
-    color: '#000',
+    color: '#fff',
   },
   error: {
     color: 'tomato',

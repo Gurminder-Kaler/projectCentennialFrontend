@@ -21,93 +21,96 @@ import HomeScreen from './app/screens/HomeScreen';
 import ViewAllTestResultsScreen from './app/screens/test/ViewAllTestResultsScreen';
 import AddATestResultScreen from './app/screens/test/AddATestResultScreen';
 // import PracticeScreen from './app/screens/practiceScreen';
+import navLabelHelper from './app/utils/navLabelHelper.json';
 
 const App = () => {
   let auth = useSelector(state => state.auth);
   let Stack = createNativeStackNavigator();
   let isLoggedIn = isEmpty(auth) ? false : true;
 
-  let helper = {
-    "loginScreen": {
-      "loggedInTitle": "Home",
-      "loggedOutTitle": "Login"
-    },
-    "homeScreen": {
-      "loggedInTitle": "Home",
-      "loggedOutTitle": "Login"
-    },
-
-  }
-
+  const helper = navLabelHelper[0];
   return (
     <NavigationContainer>
       <Stack.Navigator>
+
         <Stack.Screen
           name="loginScreen"
           options={isLoggedIn ? { title: helper.loginScreen.loggedInTitle } : { title: helper.loginScreen.loggedOutTitle }}
           component={isLoggedIn ? HomeScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="homeScreen"
-          options={isLoggedIn ? { title: helper.loginScreen.loggedInTitle } : { title: helper.loginScreen.loggedOutTitle }}
+          options={isLoggedIn ? { title: helper.homeScreen.loggedInTitle } : { title: helper.homeScreen.loggedOutTitle }}
           component={isLoggedIn ? HomeScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="registerScreen"
-          options={isLoggedIn ? { title: 'Home' } : { title: 'Register' }}
+          options={isLoggedIn ? { title: helper.registerScreen.loggedInTitle } : { title: helper.registerScreen.loggedOutTitle }}
           component={isLoggedIn ? HomeScreen : RegisterScreen}
         />
+
         <Stack.Screen
           name="forgotPasswordScreen"
-          options={isLoggedIn ? { title: helper.loginScreen.loggedInTitle } : { title: 'Forgot Password' }}
+          options={isLoggedIn ? { title: helper.forgotPasswordScreen.loggedInTitle } : { title: helper.forgotPasswordScreen.loggedOutTitle }}
           component={isLoggedIn ? HomeScreen : ForgotPasswordScreen}
         />
+
         <Stack.Screen
           name="verifyForgotPasswordOtpScreen"
-          options={isLoggedIn ? { title: 'Home' } : { title: 'Verify OTP' }}
+          options={isLoggedIn ? { title: helper.verifyForgotPasswordOtpScreen.loggedInTitle } : { title: helper.verifyForgotPasswordOtpScreen.loggedOutTitle }}
           component={isLoggedIn ? HomeScreen : VerifyForgotPasswordOtpScreen}
         />
+
         <Stack.Screen
           name="updatePasswordScreen"
-          options={{ title: 'Update Password' }}
+          options={isLoggedIn ? { title: helper.updatePasswordScreen.loggedInTitle } : { title: helper.updatePasswordScreen.loggedOutTitle }}
           component={UpdatePasswordScreen}
         />
+
         <Stack.Screen
           name="welcomeScreen"
-          options={isLoggedIn ? { title: 'Welcome' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.welcomeScreen.loggedInTitle } : { title: helper.welcomeScreen.loggedOutTitle }}
           component={isLoggedIn ? WelcomeScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="profileScreen"
-          options={isLoggedIn ? { title: 'My Profile' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.profileScreen.loggedInTitle } : { title: helper.profileScreen.loggedOutTitle }}
           component={isLoggedIn ? ProfileScreen : LoginScreen}
         />
 
         <Stack.Screen
           name="addPatientScreen"
-          options={isLoggedIn ? { title: 'Add Patient' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.addPatientScreen.loggedInTitle } : { title: helper.addPatientScreen.loggedOutTitle }}
           component={isLoggedIn ? AddAPatientScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="viewAllPatients"
-          options={isLoggedIn ? { title: 'Your all patients' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.viewAllPatients.loggedInTitle } : { title: helper.viewAllPatients.loggedOutTitle }}
           component={isLoggedIn ? ViewAllPatientsScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="viewAPatientScreen"
-          options={isLoggedIn ? { title: 'Patient\'s information' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.viewAPatientScreen.loggedInTitle } : { title: helper.viewAPatientScreen.loggedOutTitle }}
           component={isLoggedIn ? ViewAPatientScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="viewAllTestResultsScreen"
-          options={isLoggedIn ? { title: 'Patient\'s All tests' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.viewAllTestResultsScreen.loggedInTitle } : { title: helper.viewAllTestResultsScreen.loggedOutTitle }}
           component={isLoggedIn ? ViewAllTestResultsScreen : LoginScreen}
         />
+
         <Stack.Screen
           name="addATestResultScreen"
-          options={isLoggedIn ? { title: 'Add a test result' } : { title: 'Login' }}
+          options={isLoggedIn ? { title: helper.addATestResultScreen.loggedInTitle } : { title: helper.addATestResultScreen.loggedOutTitle }}
           component={isLoggedIn ? AddATestResultScreen : LoginScreen}
         />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

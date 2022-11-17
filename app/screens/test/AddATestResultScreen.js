@@ -44,7 +44,7 @@ export const AddATestResultScreen = ({ navigation }) => {
     respiratoryRate: ""
   };
 
-  const {auth} = useSelector();
+  const { auth } = useSelector((state) => state);
 
   let PerformAddition = async values => {
     let payload = {
@@ -53,7 +53,7 @@ export const AddATestResultScreen = ({ navigation }) => {
       bloodPressureHigh: values.bloodPressureHigh,
       respiratoryRate: values.respiratoryRate
     };
-    await dispatch(AddATestResult(payload));
+    await dispatch(AddATestResult(payload, navigation));
   };
 
   return (

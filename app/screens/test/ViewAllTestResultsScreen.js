@@ -4,13 +4,13 @@ import {
     Text,
     FlatList,
     View,
-    TouchableOpacity,
+    TouchableOpacity
 } from 'react-native';
 import { getAllTestsOfAPatient } from '../../actions/testAction';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-export const ViewAllTestResultsScreen = ({ navigation }) => {
+export const ViewAllTestResultsScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     // dont touch code below this
 
@@ -58,6 +58,7 @@ export const ViewAllTestResultsScreen = ({ navigation }) => {
                 : (
                     <AlternateFragment />
                 )}
+            {/* <MyTabs /> */}
         </View>
     );
 };
@@ -87,6 +88,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
         color: 'white',
         textAlign: 'center',
-      },
+    },
 });
+
+
 export default ViewAllTestResultsScreen;

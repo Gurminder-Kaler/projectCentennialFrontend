@@ -63,8 +63,8 @@ export const registerUser = (signUpData) => async dispatch => {
 };
 
 // ----------------Register Patient--------------------- //
-export const registerPatient = (patientData) => async dispatch => {
-
+export const registerPatient = (patientData, navigator) => async dispatch => {
+  console.log('navigator', navigator);
   dispatch({ type: isLoadingString, payload: { loader: true } });
   const response = await apiRequest(EndPoints.addPatient, 'POST', patientData);
 
@@ -136,7 +136,7 @@ export const verifyForgotPasswordOTP = payload => async dispatch => {
 // ----------------Update User Password--------------------- //
 export const updatePassword = payload => async dispatch => {
   dispatch({ type: isLoadingString, payload: { loader: true } });
-  const response = await apiRequest(EndPoints.updatePassword, 'POST', payload);
+  const response = await apiRequest(EndPoints.updatePassword, 'PUT', payload);
   dispatch({ type: isLoadingString, payload: { loader: false } });
   return response && response.success ? response : false;
 };
