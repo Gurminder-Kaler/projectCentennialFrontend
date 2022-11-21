@@ -20,6 +20,7 @@ import ViewAPatientScreen from './app/screens/patient/ViewAPatientScreen';
 import HomeScreen from './app/screens/HomeScreen';
 import ViewAllTestResultsScreen from './app/screens/test/ViewAllTestResultsScreen';
 import AddATestResultScreen from './app/screens/test/AddATestResultScreen';
+import ViewATestResultScreen from './app/screens/test/ViewATestResultScreen';
 // import PracticeScreen from './app/screens/practiceScreen';
 import navLabelHelper from './app/utils/navLabelHelper.json';
 
@@ -109,6 +110,12 @@ const App = () => {
           name="addATestResultScreen"
           options={isLoggedIn ? { title: helper.addATestResultScreen.loggedInTitle } : { title: helper.addATestResultScreen.loggedOutTitle }}
           component={isLoggedIn ? AddATestResultScreen : LoginScreen}
+        />
+
+        <Stack.Screen
+          name="viewATestResultScreen"
+          options={isLoggedIn ? { title: helper.viewATestResultScreen.loggedInTitle } : { title: helper.viewATestResultScreen.loggedOutTitle }}
+          component={isLoggedIn ? ViewATestResultScreen : LoginScreen}
         />
 
       </Stack.Navigator>

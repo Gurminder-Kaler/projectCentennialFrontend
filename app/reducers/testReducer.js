@@ -1,25 +1,24 @@
-import { addATestResult } from '../actions/testAction';
-import { loginString, updateTestUserString, getAllTestsOfAPatientString, getAllPatientsOfAUserString, logOutString, getAPatientsInfoString } from '../constants/testActions';
+import { getAllTestsOfAPatientString, addATestResultString, getATestResultString } from '../constants/actionStrings';
 
 export default (state = {}, action) => {
   console.log('Test reducer', action);
-  switch (action.type) { 
-    case updateTestUserString:
-      return {
-        ...state,
-        user: action.payload,
-      }; 
+  switch (action.type) {
     case getAllTestsOfAPatientString:
       return {
         ...state,
         tests: action.payload,
       };
-    case addATestResult:
+    case addATestResultString:
       return {
         ...state,
-        tests: {..., action.payload,
+        tests: action.payload,
+      };
+    case getATestResultString:
+      return {
+        ...state,
+        test: action.payload,
       };
     default:
       return state;
-  }
-};
+  };
+}

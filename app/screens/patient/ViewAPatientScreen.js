@@ -12,13 +12,12 @@ import { useDispatch, useSelector } from 'react-redux';
 export const ViewAPatientScreen = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
-  console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah dhjas", route.params);
   [showAddress, setShowAddress] = useState(false);
   useEffect(() => {
     dispatch(getAPatientsInfo(route.params.patientId));
   }, []);
 
-  const state = useSelector((state) => console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah state", state));
+  // const state = useSelector((state) => console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah state", state));
 
   const { patient } = useSelector(state => state.auth);
   return (

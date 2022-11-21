@@ -21,11 +21,6 @@ export default (state = {}, action) => {
         ...state,
         allPatients: action.payload,
       };
-    case getAllTestsOfAPatientString:
-      return {
-        ...state,
-        tests: action.payload,
-      };
     case getAPatientsInfoString:
       return {
         ...state,

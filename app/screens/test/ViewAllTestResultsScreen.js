@@ -6,6 +6,7 @@ import {
     View,
     TouchableOpacity
 } from 'react-native';
+var moment = require('moment');
 import { getAllTestsOfAPatient } from '../../actions/testAction';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,22 +14,27 @@ import { useSelector, useDispatch } from 'react-redux';
 export const ViewAllTestResultsScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     // dont touch code below this
+    // useSelector(state => console.log('STATE guru', JSON.stringify(state)));
+    const { tests } = useSelector(state => state.test);
 
     const { patient } = useSelector(state => state.auth);
     useEffect(() => {
         dispatch(getAllTestsOfAPatient(patient._id));
     }, []);
-    const { tests } = useSelector(state => state.auth);
+
     //dont touch code above this.
-    console.log('patients 123123 123', tests);
+    // console.log('patients 123123 123', tests);
     // local functional fragment isolated to refactor the code.
-    function ItemFragment(item) {
+    function ItemFragment(test) {
+        console.log('TEST', test);
         return (
             <TouchableOpacity
+                style={styles.item}
                 onPress={() => {
-                    navigation.push('viewATestResultScreen', { patientId: item._id });
+                    navigation.push('viewATestResultScreen', { testId: test.item._id });
                 }}>
-                <Text style={styles.item}>{item.risk}&nbsp;{item.createdAt}</Text>
+                <Text style={styles.itemTitle}>{test.item.risk}</Text>
+                <Text style={styles.itemDate}>{moment(test.item.createdAt).format('MMM-DD-YYYY')}</Text>
             </TouchableOpacity>
         );
     }
@@ -49,7 +55,7 @@ export const ViewAllTestResultsScreen = ({ navigation, route }) => {
         <View style={styles.body}>
             {tests && tests.length > 0 ?
                 <FlatList
-                    contentContainerStyle={styles.item}
+                    // contentContainerStyle
                     data={tests}
                     renderItem={({ item }) => (
                         item ? <ItemFragment item={item} /> : ''
@@ -77,9 +83,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000012',
         padding: 12,
     },
-    bottomText: {
-        fontSize: 18,
-        textAlign: 'center',
+    itemDate: {
+        fontSize: 12,
+        textAlign: 'left',
+    },
+    itemTitle: {
+        fontSize: 16,
+        color: 'green',
+        textAlign: 'left',
     },
     button: {
         marginTop: 190,

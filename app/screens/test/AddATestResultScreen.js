@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import RequiredSign from '../../utils/RequiredSign';
-import { AddATestResult } from '../../actions/testAction';
+import { addATestResult } from '../../actions/testAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -33,7 +33,7 @@ const validationSchema = Yup.object({
     .required('Respiratory rate is required!')
 });
 
-export const AddATestResultScreen = ({ navigation }) => {
+export const AddATestResultScreen = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
@@ -44,16 +44,19 @@ export const AddATestResultScreen = ({ navigation }) => {
     respiratoryRate: ""
   };
 
-  const { auth } = useSelector((state) => state);
-
-  let PerformAddition = async values => {
+  let performAddition = async values => {
     let payload = {
       risk: values.risk,
       bloodPressureLow: values.bloodPressureLow,
       bloodPressureHigh: values.bloodPressureHigh,
-      respiratoryRate: values.respiratoryRate
+      respiratoryRate: values.respiratoryRate,
+      userId: route.params.patientId
     };
-    await dispatch(AddATestResult(payload, navigation));
+    const output = await dispatch(addATestResult(payload, navigation));
+    console.log('Outopuot ***** y1276657688768', output);
+    if (output.success == true) {
+      navigation.navigate('viewAPatientScreen', { 'patientId': route.params.patientId})
+    }
   };
 
   return (
@@ -62,7 +65,7 @@ export const AddATestResultScreen = ({ navigation }) => {
         initialValues={formObject}
         validationSchema={validationSchema}
         onSubmit={(values, formikActions) => {
-          PerformAddition(values);
+          performAddition(values);
         }}>
         {({
           values,

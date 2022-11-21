@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,9 +8,9 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {updatePassword} from '../../actions/authAction';
-import {useDispatch} from 'react-redux';
-import {Formik} from 'formik';
+import { updatePassword } from '../../actions/authAction';
+import { useDispatch } from 'react-redux';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -24,16 +24,17 @@ let validationSchema = Yup.object({
     .required('Confirm password is required!')
     .equals([Yup.ref('password'), null], 'Passwords does not match eachother!'),
 });
-export const UpdatePasswordScreen = ({route, navigation}) => {
+export const UpdatePasswordScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
-  let formObject = {confirmPassword: '', password: ''};
-
+  let formObject = { confirmPassword: '', password: '' };
+  console.log('EMAIL EMAIl', route.params.email);
   let performLogin = async values => {
     let payload = {
       password: values.password,
       confirmPassword: values.confirmPassword,
       email: route.params.email,
     };
+    console.log('Payload', payload);
 
     let response = await dispatch(updatePassword(payload));
     if (response && response.success) {
@@ -59,7 +60,7 @@ export const UpdatePasswordScreen = ({route, navigation}) => {
           handleSubmit,
           isSubmitting,
         }) => {
-          let {email, password} = values;
+          let { email, password } = values;
           return (
             <>
               <View style={styles.body}>
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     padding: 10,
     color: '#413F42',
     borderColor: '#413F42',
-    borderWidth: 0.5, 
+    borderWidth: 0.5,
   },
   button: {
     marginHorizontal: 15,
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   },
   shadowSm: {
     shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },

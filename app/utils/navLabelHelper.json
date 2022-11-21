@@ -51,5 +51,9 @@
     "addATestResultScreen": {
       "loggedInTitle": "Add A Test",
       "loggedOutTitle": "Login"
+    },
+    "viewATestResultScreen": {
+      "loggedInTitle": "View ATest",
+      "loggedOutTitle": "Login"
     }
   }]

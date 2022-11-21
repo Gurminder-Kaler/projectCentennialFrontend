@@ -136,7 +136,7 @@ export const verifyForgotPasswordOTP = payload => async dispatch => {
 // ----------------Update User Password--------------------- //
 export const updatePassword = payload => async dispatch => {
   dispatch({ type: isLoadingString, payload: { loader: true } });
-  const response = await apiRequest(EndPoints.updatePassword, 'PUT', payload);
+  const response = await apiRequest(EndPoints.updatePassword, 'POST', payload);
   dispatch({ type: isLoadingString, payload: { loader: false } });
   return response && response.success ? response : false;
 };
