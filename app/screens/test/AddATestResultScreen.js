@@ -10,6 +10,7 @@ import {
 
 import RequiredSign from '../../utils/RequiredSign';
 import { addATestResult } from '../../actions/testAction';
+import RNPickerSelect from 'react-native-picker-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -19,18 +20,12 @@ const validationSchema = Yup.object({
     .trim()
     .min(4, 'More than 3 characters only!')
     .required('Risk is required!'),
-  bloodPressureHigh: Yup.string()
-    .trim()
-    .min(4, 'More than 3 characters only!')
-    .required('High BP value is required!'),
-  bloodPressureLow: Yup.string()
-    .trim()
-    .min(4, 'More than 3 characters only!')
+  bloodPressureLow: Yup.number('Should only be numeric value in mm Hg')
     .required('Low BP value is required!'),
-  respiratoryRate: Yup.string()
-    .trim()
-    .min(3, 'Invalid rate!')
-    .required('Respiratory rate is required!')
+  bloodPressureHigh: Yup.number('Should only be numeric value in mm Hg')
+    .required('High BP value is required!'),
+  respiratoryRate: Yup.number()
+    .required('Respiratory rate is required! in BPM')
 });
 
 export const AddATestResultScreen = ({ navigation, route }) => {
@@ -55,7 +50,7 @@ export const AddATestResultScreen = ({ navigation, route }) => {
     const output = await dispatch(addATestResult(payload, navigation));
     console.log('Outopuot ***** y1276657688768', output);
     if (output.success == true) {
-      navigation.navigate('viewAPatientScreen', { 'patientId': route.params.patientId})
+      navigation.navigate('viewAPatientScreen', { 'patientId': route.params.patientId })
     }
   };
 
@@ -80,11 +75,11 @@ export const AddATestResultScreen = ({ navigation, route }) => {
             <>
               <View style={styles.inputBox}>
                 <Text style={styles.label}>
-                  Enter patient's Lowest BP level
+                  Enter patient's Lowest BP level in mm Hg
                   <RequiredSign />
                 </Text>
                 <TextInput
-                  keyboardType="default"
+                  keyboardType="numeric"
                   style={styles.input}
                   onBlur={handleBlur('bloodPressureLow')}
                   onChangeText={handleChange('bloodPressureLow')}
@@ -99,11 +94,11 @@ export const AddATestResultScreen = ({ navigation, route }) => {
 
               <View style={styles.inputBox}>
                 <Text style={styles.label}>
-                  Enter patient's Highest BP level
+                  Enter patient's Highest BP level in mm Hg
                   <RequiredSign />
                 </Text>
                 <TextInput
-                  keyboardType="default"
+                  keyboardType="numeric"
                   style={styles.input}
                   onBlur={handleBlur('bloodPressureHigh')}
                   onChangeText={handleChange('bloodPressureHigh')}
@@ -137,15 +132,23 @@ export const AddATestResultScreen = ({ navigation, route }) => {
 
               <View style={styles.inputBox}>
                 <Text style={styles.label}>
-                  Enter patient's risk level
+                  Select patient's risk level
                   <RequiredSign />
                 </Text>
-                <TextInput
-                  keyboardType="default"
-                  style={styles.input}
-                  onBlur={handleBlur('risk')}
-                  onChangeText={handleChange('risk')}
-                  placeholder={'Enter risk level'}
+                <RNPickerSelect
+                  style={pickerStyle}
+                  onValueChange={value => {
+                    if (value !== null) {
+                      setFieldValue('risk', value);
+                    }
+                  }}
+                  items={[
+                    { label: 'Normal', value: 'normal' },
+                    { label: 'Level1', value: 'level1' },
+                    { label: 'Level2', value: 'level2' },
+                    { label: 'Level3', value: 'level3' },
+                    { label: 'Severe', value: 'severe' },
+                  ]}
                 />
                 {touched.risk && errors.risk ? (
                   <Text style={styles.error}>{errors.risk}</Text>
