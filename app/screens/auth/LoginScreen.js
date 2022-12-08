@@ -7,13 +7,16 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 //import RequiredSign from '../../utils/requiredSign';
 import { loginUser } from '../../actions/authAction';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
+// import {  } from 'react-native';
+
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -26,7 +29,7 @@ const validationSchema = Yup.object({
 export const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   // const formObject = { email: 'karan@yopmail.com', password: '12345678' };
-  const formObject = { email: 'gurminder@yopmail.com', password: '12345678' }; 
+  const formObject = { email: 'gurminder@yopmail.com', password: '12345678' };
 
   let performLogin = async values => {
     let payload = {
@@ -63,11 +66,11 @@ export const LoginScreen = ({ navigation }) => {
             <>
               <View style={styles.body}>
                 {/* <View style={styles.imageView}>
-                  <Image
-                    source={require('../../../assets/images/image2.jpg')}
-                    style={styles.image}
-                  />
-                </View> */}
+                <Image
+                  source={require('../../../assets/images/image2.jpg')}
+                  style={styles.image}
+                />
+              </View> */}
 
                 <View style={styles.brandView}>
                   <Text style={[styles.brandText, styles.shadowSm]}>
@@ -85,6 +88,7 @@ export const LoginScreen = ({ navigation }) => {
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     autoCapitalize="none"
+                    // value={formObject.email}
                     placeholder="Email"
                   />
                   {touched.email && errors.email ? (
@@ -100,6 +104,7 @@ export const LoginScreen = ({ navigation }) => {
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
                     secureTextEntry={true}
+                    // value={formObject.password}
                     placeholder="Password"
                   />
                   {touched.password && errors.password ? (
@@ -142,12 +147,13 @@ export const LoginScreen = ({ navigation }) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: '#2a2a2a02',
     alignItems: 'stretch',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     padding: 16,
     backgroundColor: 'white',
   },
@@ -163,11 +169,14 @@ const styles = StyleSheet.create({
   },
   brandView: {
     padding: 2,
+    marginBottom: 20,
   },
   brandText: {
-    fontSize: 48,
+    fontSize: 40,
     textAlign: 'center',
-    letterSpacing: 4,
+    letterSpacing: 1,
+    fontWeight: '400',
+    fontFamily: 'Pacifico-Regular',
     color: '#008B8B',
   },
   welcomeView: {

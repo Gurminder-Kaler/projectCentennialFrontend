@@ -3,13 +3,15 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   Alert,
   ScrollView,
   TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { logoutUser, getAllPatientsOfAUser } from '../../app/actions/authAction';
 import { useSelector, useDispatch } from 'react-redux';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 import showSnack from '../utils/ShowSnack';
 
 
@@ -23,28 +25,32 @@ export const HomeScreen = ({ navigation }) => {
     dispatch(getAllPatientsOfAUser(user.id));
   }, []);
   const showAlert = () =>
-    Alert.alert(
-      "Are You Sure?",
-      "You want to Logout",
-      [
-        {
-          text: "Ok",
-          onPress: () => { performLogout() },
-          style: "default",
-        },
-        {
-          text: "Cancel",
-          onPress: () => { return false; },
-          style: "destructive",
-        },
-      ],
+  Alert.alert(
+    'Are You Sure?',
+    'You want to Logout',
+    [
       {
-        cancelable: true,
-        onDismiss: () => {
+        text: 'Ok',
+        onPress: () => {
+          performLogout();
+        },
+        style: 'default',
+      },
+      {
+        text: 'Cancel',
+        onPress: () => {
           return false;
-        }
-      }
-    );
+        },
+        style: 'destructive',
+      },
+    ],
+    {
+      cancelable: true,
+      onDismiss: () => {
+        return false;
+      },
+    },
+  );
   let performLogout = () => {
     AsyncStorage.removeItem('userToken');
     dispatch(logoutUser());
@@ -55,19 +61,28 @@ export const HomeScreen = ({ navigation }) => {
     <>
       <ScrollView contentContainerStyle={styles.body}>
         <View style={styles.container}>
+          <View style={styles.imageView}>
+            <Image
+              source={require('../../assets/images/image.jpg')}
+              style={styles.image}
+            />
+          </View>
+          <View style={styles.brandView}>
+            <Text style={[styles.brandText, styles.shadowSm]}>
+              Hello, how are you doing today?
+            </Text>
+          </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('addPatientScreen')}
-            style={styles.blackBox}>
+            style={[styles.box, styles.addBox]}>
             <Text style={styles.label}>Add Patient</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('viewAllPatients')}
-            style={styles.blackBox}>
-            <Text style={styles.label}>View Your Patients</Text>
+            style={[styles.box, styles.listBox]}>
+            <Text style={styles.label}>List Patients</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => showAlert()}
-            style={styles.redBox}>
+          <TouchableOpacity onPress={() => showAlert()} style={styles.redBox}>
             <Text style={styles.label}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -77,31 +92,64 @@ export const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, flexDirection: 'row', flexWrap: 'wrap' },
-  blackBox: {
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    backgroundColor: 'teal',
+    height: 300,
+    width: 350,
+  },
+  brandView: {
+    padding: 2,
+    marginBottom: 90,
+  },
+  brandText: {
+    fontSize: 20,
+    textAlign: 'center',
+    letterSpacing: 1,
+    fontWeight: 'normal',
+    fontFamily: 'Raleway',
+    color: '#008B8B',
+  },
+  box: {
     width: '100%',
-    marginTop: 2,
+    marginTop: 10,
     padding: 2,
     fontSize: 24,
-    height: 90,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#000',
   },
+
+  addBox: {
+    backgroundColor: '#22A39F',
+  },
+
+  listBox: {
+    backgroundColor: '#68B984',
+  },
+
   redBox: {
     width: '100%',
-    marginTop: 2,
+    marginTop: 12,
     padding: 2,
-    fontSize: 24,
-    height: 90,
+    fontSize: 22,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#f00',
+    backgroundColor: '#D23369',
   },
   label: {
-    fontSize: 19,
+    fontSize: 22,
     marginTop: 0,
-    color: '#fff'
+    fontFamily: 'Raleway',
+    letterSpacing: 1,
+    color: '#fff',
   },
   score: {
     textAlign: 'center',
@@ -117,6 +165,6 @@ const styles = StyleSheet.create({
   bottomText: {
     fontSize: 24,
     textAlign: 'center',
-  }
+  },
 });
 export default HomeScreen;

@@ -38,7 +38,7 @@ const validationSchema = Yup.object({
 
 export const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  
+
   const formObject = {
     firstName: '',
     lastName: '',
@@ -80,17 +80,22 @@ export const RegisterScreen = ({ navigation }) => {
         }) => {
           return (
             <>
+              <View style={styles.welcomeView}>
+                <Text style={styles.welcomeText}>
+                  Please provide details below to create account
+                </Text>
+              </View>
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter your first name
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onBlur={handleBlur('firstName')}
                   onChangeText={handleChange('firstName')}
-                  placeholder={'Enter your first name'}
+                  placeholder={'First name'}
                 />
                 {touched.firstName && errors.firstName ? (
                   <Text style={styles.error}>{errors.firstName}</Text>
@@ -100,16 +105,16 @@ export const RegisterScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter your last name
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('lastName')}
                   onBlur={handleBlur('lastName')}
-                  placeholder={'Enter your last name'}
+                  placeholder={'Last name'}
                 />
                 {touched.lastName && errors.lastName ? (
                   <Text style={styles.error}>{errors.lastName}</Text>
@@ -120,11 +125,11 @@ export const RegisterScreen = ({ navigation }) => {
 
               <View style={styles.inputBox}>
                 <Text style={styles.label}>
-                  Select your gender
-                  <RequiredSign />
+                  Gender
+                  {/* <RequiredSign /> */}
                 </Text>
                 <RNPickerSelect
-                  style={styles.input}
+                  style={pickerStyle}
                   onValueChange={value => {
                     console.log('value RNPickerSelect', value);
                     if (value !== null) {
@@ -145,14 +150,13 @@ export const RegisterScreen = ({ navigation }) => {
                 )}
               </View>
 
-
               <View style={styles.inputBox}>
                 <Text style={styles.label}>
-                  Select your role
-                  <RequiredSign />
+                  Your role
+                  {/* <RequiredSign /> */}
                 </Text>
                 <RNPickerSelect
-                  style={styles.input}
+                  style={pickerStyle}
                   onValueChange={value => {
                     console.log('value RNPickerSelect', value);
                     if (value !== null) {
@@ -162,7 +166,7 @@ export const RegisterScreen = ({ navigation }) => {
                   }}
                   items={[
                     { label: 'Nurse', value: 'NURSE' },
-                    { label: 'Doctor', value: 'DOCTOR' }
+                    { label: 'Doctor', value: 'DOCTOR' },
                   ]}
                 />
                 {touched.role && errors.role ? (
@@ -173,15 +177,15 @@ export const RegisterScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter your email
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('email')}
-                  placeholder={'Enter your email'}
+                  placeholder={'Email'}
                   onBlur={handleBlur('email')}
                   autoCapitalize="none"
                 />
@@ -194,17 +198,17 @@ export const RegisterScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Create your password
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   autoCapitalize="none"
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
-                  placeholder={'Create your password'}
+                  placeholder={'Create password'}
                   secureTextEntry={true}
                 />
                 {touched.password && errors.password ? (
@@ -215,17 +219,17 @@ export const RegisterScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Confirm your password
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   autoCapitalize="none"
                   onChangeText={handleChange('confirmPassword')}
                   onBlur={handleBlur('confirmPassword')}
-                  placeholder={'Confirm your password'}
+                  placeholder={'Confirm password'}
                   secureTextEntry={true}
                 />
                 {touched.confirmPassword && errors.confirmPassword ? (
@@ -236,8 +240,7 @@ export const RegisterScreen = ({ navigation }) => {
               </View>
 
               <View style={[styles.button, styles.shadowSm]}>
-                <TouchableOpacity
-                  onPress={handleSubmit}>
+                <TouchableOpacity onPress={handleSubmit}>
                   <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
               </View>
@@ -245,14 +248,33 @@ export const RegisterScreen = ({ navigation }) => {
           );
         }}
       </Formik>
-
-      <View style={styles.extraInputBox}>
+      <View style={[styles.inputBox, styles.signUpView]}>
+        <Text style={styles.bottomText}>Already a member?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('loginScreen')}>
-          <Text style={styles.bottomText}>Already a member? Login now</Text>
+          <Text style={styles.signUp}>Login now</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
+};
+
+
+const pickerStyle = {
+  inputIOS: {
+    color: 'teal',
+    paddingVertical: 4,
+    borderRadius: 5,
+    fontWeight: '700',
+    fontSize: 16,
+  },
+  placeholder: {
+    color: '#888888',
+  },
+  inputAndroid: {
+    color: 'black',
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
 };
 
 const styles = StyleSheet.create({
@@ -264,6 +286,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: 'white',
   },
+
   imageView: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -288,15 +311,12 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   welcomeText: {
-    color: '#7F8487',
+    color: '#666666',
     textAlign: 'center',
   },
   inputBox: {
     margin: 5,
     padding: 10,
-  },
-  extraInputBox: {
-    margin: 35,
   },
   error: {
     color: 'tomato',
@@ -345,6 +365,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   signUpView: {
+    margin: 0,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

@@ -7,7 +7,8 @@ import {
 } from '../constants/string';
 
 import showSnack from '../utils/ShowSnack';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 
 export const apiRequest = async (url, method = 'GET', body = undefined) => {
   try {

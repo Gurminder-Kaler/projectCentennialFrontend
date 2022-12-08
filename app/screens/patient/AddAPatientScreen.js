@@ -102,18 +102,23 @@ export const AddAPatientScreen = ({ navigation }) => {
           setFieldValue,
         }) => {
           return (
-            <View style={styles.screenBackground}>
+            <View style={styles.body}>
+              <View style={styles.brandView}>
+                <Text style={[styles.brandText, styles.shadowSm]}>
+                  Provide details to add patient
+                </Text>
+              </View>
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter patient's first name
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onBlur={handleBlur('firstName')}
                   onChangeText={handleChange('firstName')}
-                  placeholder={'Enter your first name'}
+                  placeholder={'First name'}
                 />
                 {touched.firstName && errors.firstName ? (
                   <Text style={styles.error}>{errors.firstName}</Text>
@@ -123,16 +128,16 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter patient's last name
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('lastName')}
                   onBlur={handleBlur('lastName')}
-                  placeholder={'Enter your last name'}
+                  placeholder={'Last name'}
                 />
                 {touched.lastName && errors.lastName ? (
                   <Text style={styles.error}>{errors.lastName}</Text>
@@ -142,10 +147,7 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
-                  Select patient's gender
-                  <RequiredSign />
-                </Text>
+                <Text style={styles.label}>Gender</Text>
                 <RNPickerSelect
                   style={pickerStyle}
                   onValueChange={value => {
@@ -167,15 +169,15 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter patient's email
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('email')}
-                  placeholder={'Enter your email'}
+                  placeholder={'Email'}
                   onBlur={handleBlur('email')}
                   autoCapitalize="none"
                 />
@@ -188,16 +190,16 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter patient's address
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('address')}
                   onBlur={handleBlur('address')}
-                  placeholder={'Enter patient\'s address'}
+                  placeholder={'Address'}
                 />
                 {touched.address && errors.address ? (
                   <Text style={styles.error}>{errors.address}</Text>
@@ -207,16 +209,16 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter patient's city
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('city')}
                   onBlur={handleBlur('city')}
-                  placeholder={'Enter patient\'s city'}
+                  placeholder={'City'}
                 />
                 {touched.city && errors.city ? (
                   <Text style={styles.error}>{errors.city}</Text>
@@ -226,16 +228,16 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
+                {/* <Text style={styles.label}>
                   Enter patient's postal code
                   <RequiredSign />
-                </Text>
+                </Text> */}
                 <TextInput
                   keyboardType="default"
                   style={styles.input}
                   onChangeText={handleChange('postalCode')}
                   onBlur={handleBlur('postalCode')}
-                  placeholder={'Enter patient\'s postalCode'}
+                  placeholder={'Postal code'}
                 />
                 {touched.postalCode && errors.postalCode ? (
                   <Text style={styles.error}>{errors.postalCode}</Text>
@@ -245,10 +247,7 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
-                  Select patient's province
-                  <RequiredSign />
-                </Text>
+                <Text style={styles.label}>Province</Text>
                 <RNPickerSelect
                   style={pickerStyle}
                   onValueChange={value => {
@@ -266,10 +265,7 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.label}>
-                  Select patient's blood group
-                  <RequiredSign />
-                </Text>
+                <Text style={styles.label}>Blood group</Text>
                 <RNPickerSelect
                   style={pickerStyle}
                   onValueChange={value => {
@@ -287,9 +283,8 @@ export const AddAPatientScreen = ({ navigation }) => {
               </View>
 
               <View style={[styles.button, styles.shadowSm]}>
-                <TouchableOpacity
-                  onPress={handleSubmit}>
-                  <Text style={styles.buttonText}>Submit</Text>
+                <TouchableOpacity onPress={handleSubmit}>
+                  <Text style={styles.buttonText}>Add Patient</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -299,45 +294,46 @@ export const AddAPatientScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+
 const pickerStyle = {
   inputIOS: {
-    color: 'white',
-    paddingHorizontal: 10,
-    backgroundColor: '#ff000090',
+    color: '#444444',
+    paddingVertical: 4,
     borderRadius: 5,
+    fontWeight: '500',
+    fontSize: 18,
   },
   placeholder: {
-    color: 'black',
+    color: '#888888',
   },
   inputAndroid: {
     color: 'black',
     paddingHorizontal: 10,
-    backgroundColor: '#ff000090',
     borderRadius: 5,
   },
 };
 
 const styles = StyleSheet.create({
   screenBackground: {
-    backgroundColor: 'black',
-    color: 'white'
+    backgroundColor: 'white',
   },
   body: {
     flexGrow: 1,
-    backgroundColor: '#000',
     alignItems: 'stretch',
     justifyContent: 'flex-start',
     padding: 16,
+    backgroundColor: 'white',
   },
   inputBox: {
     margin: 5,
-    padding: 10,
+    padding: 4,
   },
-  extraInputBox: {
-    margin: 35,
-  },
+  // extraInputBox: {
+  //   margin: 35,
+  // },
   label: {
-    color: '#fff',
+    color: '#333333',
   },
   error: {
     color: 'tomato',
@@ -348,25 +344,36 @@ const styles = StyleSheet.create({
   input: {
     textAlign: 'left',
     fontSize: 20,
+    color: '#444444',
     backgroundColor: 'white',
     borderRadius: 2,
     padding: 10,
-    color: '#000',
     borderColor: '#00000040',
     borderWidth: 0.5,
   },
   button: {
     marginHorizontal: 15,
     padding: 15,
-    backgroundColor: '#ff000090',
+    backgroundColor: '#008B8B',
     borderRadius: 2,
     marginVertical: 10,
   },
   shadowSm: {
-    shadowColor: '#fff',
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
+  },
+  brandView: {
+    padding: 2,
+    marginBottom: 8,
+  },
+  brandText: {
+    fontSize: 18,
+    textAlign: 'center',
+    letterSpacing: 1,
+    fontWeight: 'normal',
+    fontFamily: 'Raleway',
+    color: '#666666',
   },
   buttonText: {
     color: 'white',
@@ -375,7 +382,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 0.5,
     fontWeight: '500',
-  }
+  },
 });
+
 
 export default AddAPatientScreen;

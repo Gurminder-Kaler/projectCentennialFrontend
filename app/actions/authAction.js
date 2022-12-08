@@ -10,8 +10,11 @@ import {
   registerPatientString,
   updateAuthUserString,
 } from '../constants/actionStrings';
+import {
+  AsyncStorage
+} from 'react-native';
 import EndPoints from '../constants/endPoints';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 // -------------  set user details ------- //
 export const setUserDetails = () => async dispatch => {

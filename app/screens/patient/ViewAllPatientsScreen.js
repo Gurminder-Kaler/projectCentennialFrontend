@@ -65,19 +65,18 @@ export const ViewAllPatientsScreen = ({ navigation }) => {
 
     console.log('patients 123123 123', allPatients);
     const renderSearchBar = () => (
-        <View
-            style={styles.searchBar}>
-            <TextInput
-                clearButtonMode='always'
-                keyboardType="default"
-                autoCorrect={false}
-                value={searchTerm}
-                style={styles.input}
-                onChangeText={text => handleSearch(text)}
-                placeholder={'Search...'}
-            />
+        <View style={styles.searchBar}>
+          <TextInput
+            clearButtonMode="always"
+            keyboardType="default"
+            autoCorrect={false}
+            value={searchTerm}
+            style={styles.input}
+            onChangeText={text => handleSearch(text)}
+            placeholder={'Search...'}
+          />
         </View>
-    )
+      );
 
     return (
         <View style={styles.body}>
@@ -103,39 +102,59 @@ export const ViewAllPatientsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     searchBar: {
-        padding: 5,
-        backgroundColor: 'white'
+      fontFamily: 'Raleway',
+      padding: 5,
+      borderWidth: 1,
+      borderRadius: 50,
+      backgroundColor: 'white',
+      marginBottom: 20,
+    },
+    welcomeView: {
+      margin: 4,
+      padding: 4,
+    },
+    welcomeText: {
+      color: 'teal',
+      fontSize: 26,
+      textAlign: 'center',
+      fontFamily: 'Pacifico',
     },
     body: {
-        flex: 1,
-        backgroundColor: '#2a2a2a02',
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        padding: 25,
+      fontFamily: 'Raleway',
+      flex: 1,
+      backgroundColor: 'white',
+      alignItems: 'stretch',
+      justifyContent: 'flex-start',
+      padding: 25,
     },
+    itemContainer: {},
     item: {
-        margin: 5,
-        autoCapitalize: true,
-        backgroundColor: '#00000012',
-        padding: 12,
+      marginTop: 10,
+      backgroundColor: 'transparent',
+      autoCapitalize: true,
+      padding: 14,
+      fontSize: 16,
+      letterSpacing: 0.5,
+      borderWidth: 0.5,
+      fontFamily: 'Raleway',
     },
     bottomText: {
-        fontSize: 18,
-        textAlign: 'center',
+      fontSize: 18,
+      textAlign: 'center',
     },
     label: {
-        color: '#fff',
+      color: '#fff',
     },
     error: {
-        color: 'tomato',
-        fontSize: 14,
-        padding: 5,
-        marginTop: 4,
+      color: 'tomato',
+      fontSize: 14,
+      padding: 5,
+      marginTop: 4,
     },
     input: {
-        fontSize: 20,
-        padding: 5,
-        color: '#000',
+      fontSize: 20,
+      padding: 5,
+      color: '#000',
     },
-});
+  });
 export default ViewAllPatientsScreen;

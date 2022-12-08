@@ -12,7 +12,6 @@ import { updatePassword } from '../../actions/authAction';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import AsyncStorage from '@react-native-community/async-storage';
 
 let validationSchema = Yup.object({
   password: Yup.string()
