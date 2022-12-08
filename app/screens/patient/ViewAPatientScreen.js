@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,84 +6,136 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { getAPatientsInfo } from '../../actions/authAction';
-import { useDispatch, useSelector } from 'react-redux';
+import {getAPatientsInfo} from '../../actions/authAction';
+import {useDispatch, useSelector} from 'react-redux';
 
-export const ViewAPatientScreen = ({ navigation, route }) => {
-
+export const ViewAPatientScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
-  [showAddress, setShowAddress] = useState(false);
+  [showAddress, setShowAddress] = useState(true);
   useEffect(() => {
     dispatch(getAPatientsInfo(route.params.patientId));
   }, []);
 
   // const state = useSelector((state) => console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah state", state));
 
-  const { patient } = useSelector(state => state.auth);
+  const {patient} = useSelector(state => state.auth);
   return (
     <ScrollView contentContainerStyle={styles.body}>
       <View style={styles.body}>
-
+        <View style={styles.brandView}>
+          <Text style={[styles.brandText, styles.shadowSm]}>
+            {patient.firstName} {patient.lastName}
+          </Text>
+        </View>
         <View style={styles.inputBox}>
-          <Text style={styles.label}>Email:  <Text style={styles.boldText}>{patient ? patient.email : ''}</ Text></Text>
+          <Text style={styles.label}>
+            Email:{' '}
+            <Text style={styles.patientData}>
+              {patient ? patient.email : ''}
+            </Text>
+          </Text>
+        </View>
+
+        {/* <View style={styles.inputBox}>
+          <Text style={styles.label}>
+            First name:{' '}
+            <Text style={styles.patientData}>
+              {patient ? patient.firstName : ''}
+            </Text>
+          </Text>
         </View>
 
         <View style={styles.inputBox}>
-          <Text style={styles.label}>First name:  <Text style={styles.boldText}>{patient ? patient.firstName : ''}</ Text></Text>
-        </View>
+          <Text style={styles.label}>
+            Last name:{' '}
+            <Text style={styles.patientData}>
+              {patient ? patient.lastName : ''}
+            </Text>
+          </Text>
+        </View> */}
 
         <View style={styles.inputBox}>
-          <Text style={styles.label}>Last name:  <Text style={styles.boldText}>{patient ? patient.lastName : ''}</ Text></Text>
-        </View>
-
-        <View style={styles.inputBox}>
-          <Text style={styles.label}>Blood Group:  <Text style={styles.boldText}>{patient ? patient.bloodGroup : ''}</ Text></Text>
+          <Text style={styles.label}>
+            Blood Group:{' '}
+            <Text style={styles.patientData}>
+              {patient ? patient.bloodGroup : ''}
+            </Text>
+          </Text>
         </View>
         {showAddress ? (
           <View>
             <View style={styles.inputBox}>
-              <Text style={styles.label}>Address:  <Text style={styles.boldText}>{patient ? patient.address : ''}</ Text></Text>
+              <Text style={styles.label}>
+                Address:{' '}
+                <Text style={styles.patientData}>
+                  {patient ? patient.address : ''}
+                </Text>
+              </Text>
             </View>
 
             <View style={styles.inputBox}>
-              <Text style={styles.label}>City:  <Text style={styles.boldText}>{patient ? patient.city : ''}</ Text></Text>
+              <Text style={styles.label}>
+                City:{' '}
+                <Text style={styles.patientData}>
+                  {patient ? patient.city : ''}
+                </Text>
+              </Text>
             </View>
 
             <View style={styles.inputBox}>
-              <Text style={styles.label}>Postal Code:  <Text style={styles.boldText}>{patient ? patient.postalCode : ''}</ Text></Text>
+              <Text style={styles.label}>
+                Postal Code:{' '}
+                <Text style={styles.patientData}>
+                  {patient ? patient.postalCode : ''}
+                </Text>
+              </Text>
             </View>
 
             <View style={styles.inputBox}>
-              <Text style={styles.label}>Province:  <Text style={styles.boldText}>{patient ? patient.province : ''}</ Text></Text>
+              <Text style={styles.label}>
+                Province:{' '}
+                <Text style={styles.patientData}>
+                  {patient ? patient.province : ''}
+                </Text>
+              </Text>
             </View>
-            <View style={styles.buttonBox}>
+            {/* <View style={styles.buttonBox}>
               <TouchableOpacity
-                onPress={() => setShowAddress(false)} style={{ alignContent: 'center' }}>
+                onPress={() => setShowAddress(false)}
+                style={{alignContent: 'center'}}>
                 <Text style={styles.buttonAddress}>Hide address</Text>
               </TouchableOpacity>
-            </View>
-          </View>) :
+            </View> */}
+          </View>
+        ) : (
           <View style={styles.buttonBox}>
-            <TouchableOpacity
-              onPress={() => setShowAddress(true)}>
+            <TouchableOpacity onPress={() => setShowAddress(true)}>
               <Text style={styles.buttonAddress}>View address</Text>
             </TouchableOpacity>
-          </View>}
+          </View>
+        )}
 
-        <View style={styles.inputBox}>
+        <View style={styles.buttonBox}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('viewAllTestResultsScreen', { patientId: route.params.patientId })}>
-            <Text style={styles.buttonT}>View patient's test results</Text>
+            onPress={() =>
+              navigation.navigate('viewAllTestResultsScreen', {
+                patientId: route.params.patientId,
+              })
+            }>
+            <Text style={styles.buttonT}>View Test Results</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.inputBox}>
+        <View style={styles.buttonBox}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('addATestResultScreen', { patientId: route.params.patientId })}>
-            <Text style={styles.button}>Add a test result</Text>
+            onPress={() =>
+              navigation.navigate('addATestResultScreen', {
+                patientId: route.params.patientId,
+              })
+            }>
+            <Text style={styles.button}>Add Test Result</Text>
           </TouchableOpacity>
         </View>
-
       </View>
     </ScrollView>
   );
@@ -100,18 +152,29 @@ const styles = StyleSheet.create({
   required: {
     color: 'red',
   },
+  brandView: {
+    padding: 2,
+    marginBottom: 20,
+  },
+  brandText: {
+    fontSize: 36,
+    textAlign: 'center',
+    letterSpacing: 1,
+    fontWeight: '400',
+    fontFamily: 'Pacifico-Regular',
+    color: '#2B3A55',
+  },
   label: {
     fontSize: 19,
   },
   inputBox: {
     margin: 5,
-    backgroundColor: '#00000012',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#888888',
     padding: 12,
   },
   buttonBox: {
-    margin: 5,
-    backgroundColor: '#00000012',
-    padding: 12,
+    marginTop: 30,
     textAlign: 'center',
   },
   error: {
@@ -138,31 +201,36 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   button: {
-    padding: 10,
-    fontSize: 24,
-    backgroundColor: 'green',
+    padding: 20,
+    fontSize: 20,
+    textTransform: 'uppercase',
+    backgroundColor: '#434242',
     color: 'white',
+    fontFamily: 'Raleway',
     textAlign: 'center',
   },
   buttonT: {
-    padding: 10,
-    fontSize: 24,
-    backgroundColor: 'black',
+    padding: 20,
+    fontFamily: 'Raleway',
+    textTransform: 'uppercase',
+    fontSize: 20,
+    backgroundColor: '#2B3A55',
     color: 'white',
     textAlign: 'center',
   },
   buttonAddress: {
     padding: 10,
-    marginLeft: "15%",
+    marginLeft: '15%',
     fontSize: 19,
     width: 200,
     backgroundColor: 'black',
     color: 'white',
     textAlign: 'center',
   },
-  boldText: {
-    fontWeight: "bold",
-    fontSize: 24
-  }
+  patientData: {
+    fontSize: 20,
+    color: '#444444',
+    letterSpacing: 0.3,
+  },
 });
 export default ViewAPatientScreen;
