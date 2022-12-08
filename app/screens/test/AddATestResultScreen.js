@@ -49,9 +49,9 @@ export const AddATestResultScreen = ({ navigation, route }) => {
     };
     const output = await dispatch(addATestResult(payload, navigation));
     console.log('Outopuot ***** y1276657688768', output);
-    if (output.success == true) {
-      navigation.navigate('viewAPatientScreen', { 'patientId': route.params.patientId })
-    }
+    // if (output.success == true) {
+    //   navigation.navigate('viewAPatientScreen', { 'patientId': route.params.patientId })
+    // }
   };
 
   return (

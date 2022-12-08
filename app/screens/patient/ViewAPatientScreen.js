@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,19 +6,22 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {getAPatientsInfo} from '../../actions/authAction';
-import {useDispatch, useSelector} from 'react-redux';
+import { getAPatientsInfo } from '../../actions/authAction';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ViewAPatientScreen = ({navigation, route}) => {
+export const ViewAPatientScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   [showAddress, setShowAddress] = useState(true);
   useEffect(() => {
-    dispatch(getAPatientsInfo(route.params.patientId));
+  //  console.log('patient._id', patient._id);
+   const abc =  dispatch(getAPatientsInfo(patient._id));
+   console.log('abc', abc);
   }, []);
 
   // const state = useSelector((state) => console.log("PAORTALDJ LS jasdlaskajhjkahsdkjah state", state));
-
-  const {patient} = useSelector(state => state.auth);
+  const patient = route.params.patient;
+  console.log('patient *****', patient);
+  // const { patient } = useSelector(state => state.auth);
   return (
     <ScrollView contentContainerStyle={styles.body}>
       <View style={styles.body}>
@@ -119,7 +122,7 @@ export const ViewAPatientScreen = ({navigation, route}) => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('viewAllTestResultsScreen', {
-                patientId: route.params.patientId,
+                patientId: patient._id,
               })
             }>
             <Text style={styles.buttonT}>View Test Results</Text>
@@ -130,7 +133,7 @@ export const ViewAPatientScreen = ({navigation, route}) => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('addATestResultScreen', {
-                patientId: route.params.patientId,
+                patientId: patient._id,
               })
             }>
             <Text style={styles.button}>Add Test Result</Text>

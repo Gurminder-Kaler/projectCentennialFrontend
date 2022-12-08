@@ -85,7 +85,7 @@ export const ViewAllPatientsScreen = ({navigation}) => {
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => {
-                navigation.push('viewAPatientScreen', {patientId: item._id});
+                navigation.push('viewAPatientScreen', {patient: item});
               }}>
               <Text style={styles.item}>
                 {item ? item.lastName : ''}&nbsp;{item ? item.firstName : ''}
