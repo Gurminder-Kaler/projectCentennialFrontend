@@ -15,7 +15,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import AsyncStorage from '@react-native-community/async-storage';
 
-let validationSchema = Yup.object({
+const validationSchema = Yup.object({
   email: Yup.string()
     .trim()
     .email('Not a valid email.')
@@ -25,15 +25,17 @@ let validationSchema = Yup.object({
 
 export const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  let formObject = { email: 'karan@yopmail.com', password: '12345678' };
-  // let formObject = { email: '', password: '' };
+  // const formObject = { email: 'karan@yopmail.com', password: '12345678' };
+  const formObject = { email: 'gurminder@yopmail.com', password: '12345678' }; 
 
   let performLogin = async values => {
     let payload = {
       email: values.email,
       password: values.password,
     };
+    console.log('payload', payload);
     let response = await dispatch(loginUser(payload));
+    console.log('login response line 38', response);
     if (response && response.success) {
       AsyncStorage.setItem('userToken', response.token);
     }
@@ -83,7 +85,6 @@ export const LoginScreen = ({ navigation }) => {
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     autoCapitalize="none"
-                    // value={formObject.email}
                     placeholder="Email"
                   />
                   {touched.email && errors.email ? (
@@ -99,7 +100,6 @@ export const LoginScreen = ({ navigation }) => {
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
                     secureTextEntry={true}
-                    // value={formObject.password}
                     placeholder="Password"
                   />
                   {touched.password && errors.password ? (

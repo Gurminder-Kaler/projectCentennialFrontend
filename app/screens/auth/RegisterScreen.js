@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -38,6 +38,7 @@ const validationSchema = Yup.object({
 
 export const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  
   const formObject = {
     firstName: '',
     lastName: '',

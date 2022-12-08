@@ -1,4 +1,5 @@
 import apiRequest from '../network/api';
+import axios from 'axios';
 import {
   loginString,
   isLoadingString,
@@ -21,15 +22,25 @@ export const setUserDetails = () => async dispatch => {
 };
 // ------------------ Login User  ----------------------- //
 export const loginUser = loginData => async dispatch => {
-  dispatch({ type: isLoadingString, payload: { loader: true } });
-  let response = await apiRequest(EndPoints.signIn, 'POST', loginData);
-  if (response && response.success) {
-    AsyncStorage.setItem('userToken', response.token);
-    AsyncStorage.setItem('user', JSON.stringify(response.data));
-    dispatch({ type: loginString, payload: response.data });
-  }
-  dispatch({ type: isLoadingString, payload: { loader: false } });
-  return response ? response : false;
+  console.log('LOGIN DATA 123', loginData);
+  // dispatch({ type: isLoadingString, payload: { loader: true } });
+  // let response = await apiRequest(EndPoints.signIn, 'POST', loginData);
+  console.log('EndPoints.signIn', EndPoints.signIn);
+  axios.post('http://localhost:8001/' + EndPoints.signIn, loginData)
+    .then(function (response) {
+      console.log('response22', response);
+      if (response && response.data.success) {
+        AsyncStorage.setItem('userToken', response.data.token);
+        AsyncStorage.setItem('user', JSON.stringify(response.data.data));
+        dispatch({ type: loginString, payload: response.data });
+      }
+      dispatch({ type: isLoadingString, payload: { loader: false } });
+      console.log('response.data line 38 authAction', response.data);
+      return response ? response.data : false;
+    }).catch(function (error) {
+      // handle error
+    })
+
 };
 
 // ------------------ Google Login  ----------------------- //
@@ -57,6 +68,7 @@ export const registerUser = (signUpData) => async dispatch => {
   if (response && response.success) {
     AsyncStorage.setItem('userToken', response.token);
     AsyncStorage.setItem('user', JSON.stringify(response.data));
+    console.log('RESPONSE', AsyncStorage.getItem('userToken'));
     dispatch({ type: loginString, payload: response.data });
   }
   dispatch({ type: isLoadingString, payload: { loader: false } });

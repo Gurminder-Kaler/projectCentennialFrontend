@@ -4,15 +4,8 @@
 
 //-------- Development Environment-------------------//
 export const baseURL = 'http://localhost:8001/';
-// export const imageUrl = 'http://localhost:8001/storage/';
-
-// export const baseURL = 'http://54.235.253.81/';
-// export const imageUrl = 'http://54.235.253.81/storage/';
 
 // --------- Google sign In --------------------------//
-export const clientId = '100431375561-sns3a937hmcbuhb2bb0jrrau5nkscu5t.apps.googleusercontent.com';
-export const secretId = '';
-export const googleId = '100431375561-sns3a937hmcbuhb2bb0jrrau5nkscu5t.apps.googleusercontent.com';
 export const webClientIdAndroid='521216448326-li6rv4rnp913f5crmla2etshi8tc0bvj.apps.googleusercontent.com';
 export const APIkey = '';
 

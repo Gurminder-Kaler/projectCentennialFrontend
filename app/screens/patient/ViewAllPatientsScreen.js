@@ -14,20 +14,26 @@ import { TextInput } from 'react-native-gesture-handler';
 export const ViewAllPatientsScreen = ({ navigation }) => {
     const dispatch = useDispatch();
 
+
     const { user } = useSelector(state => state.auth);
 
-
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const [allPatientsList, setAllPatientsList] = useState();
     useEffect(() => {
         dispatch(getAllPatientsOfAUser(user.id));
     }, []);
+
     const { allPatients } = useSelector(state => state.auth);
+    
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const [allPatientsList, setAllPatientsList] = useState(allPatients);
+
+    console.log('allPatients', allPatients);
 
     useEffect(() => {
         setAllPatientsList(allPatients);
     }, [])
+
+    console.log('allPatientsList', allPatientsList);
 
     const contains = (patient, query) => {
         const { firstName, lastName } = patient;
@@ -41,19 +47,22 @@ export const ViewAllPatientsScreen = ({ navigation }) => {
         return false;
     };
     const handleSearch = text => {
-        const filteredData = filter(allPatientsList, patient => {
+        const filteredData = filter(allPatients, patient => {
             console.log('aptient ;line 40', patient);
             return contains(patient, text);
         });
 
         if (text == '') {
+            console.log('50', allPatients);
             setAllPatientsList(allPatients);
         } else {
+            console.log('53', allPatients);
             setAllPatientsList(filteredData);
         }
 
         setSearchTerm(text);
     };
+
     console.log('patients 123123 123', allPatients);
     const renderSearchBar = () => (
         <View

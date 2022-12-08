@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,21 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { logoutUser } from '../../app/actions/authAction';
-import { useDispatch } from 'react-redux';
+import { logoutUser, getAllPatientsOfAUser } from '../../app/actions/authAction';
+import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import showSnack from '../utils/ShowSnack'; 
+import showSnack from '../utils/ShowSnack';
+
+
 
 export const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const { user } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    dispatch(getAllPatientsOfAUser(user.id));
+  }, []);
   const showAlert = () =>
     Alert.alert(
       "Are You Sure?",

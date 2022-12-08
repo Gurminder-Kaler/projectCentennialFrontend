@@ -2,7 +2,7 @@
  * Project React Native by Himanshu and Gurminder(301294300)
  * 
  */
-import React, { useEffect } from 'react';
+import React from 'react';
 import isEmpty from './app/validations/isEmpty';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
