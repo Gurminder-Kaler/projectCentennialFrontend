@@ -10,11 +10,11 @@ import {
   registerPatientString,
   updateAuthUserString,
 } from '../constants/actionStrings';
-import {
-  AsyncStorage
-} from 'react-native';
+// import {
+//   AsyncStorage
+// } from 'react-native';
 import EndPoints from '../constants/endPoints';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // -------------  set user details ------- //
 export const setUserDetails = () => async dispatch => {
@@ -31,8 +31,8 @@ export const loginUser = loginData => async dispatch => {
   console.log('EndPoints.signIn', EndPoints.signIn);
   axios.post('http://localhost:8001/' + EndPoints.signIn, loginData)
     .then(function (response) {
-      console.log('response22', response);
       if (response && response.data.success) {
+        console.log('response22', response);
         AsyncStorage.setItem('userToken', response.data.token);
         AsyncStorage.setItem('user', JSON.stringify(response.data.data));
         dispatch({ type: loginString, payload: response.data });

@@ -7,11 +7,10 @@ import {
   Alert,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage
 } from 'react-native';
 import { logoutUser, getAllPatientsOfAUser } from '../../app/actions/authAction';
 import { useSelector, useDispatch } from 'react-redux';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import showSnack from '../utils/ShowSnack';
 
 

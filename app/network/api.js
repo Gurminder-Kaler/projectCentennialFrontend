@@ -7,13 +7,14 @@ import {
 } from '../constants/string';
 
 import showSnack from '../utils/ShowSnack';
-// import AsyncStorage from '@react-native-community/async-storage';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { AsyncStorage } from 'react-native';
 
 export const apiRequest = async (url, method = 'GET', body = undefined) => {
   try {
     const userToken = await AsyncStorage.getItem('userToken');
     console.log('network api url ////////////////', baseURL + url);
+    console.log('network api userToken ////////////////', userToken);
     let params = {
       method: method,
       url: baseURL + url,

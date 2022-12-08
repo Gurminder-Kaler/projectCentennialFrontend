@@ -7,15 +7,15 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  AsyncStorage
+  // AsyncStorage
 } from 'react-native';
 //import RequiredSign from '../../utils/requiredSign';
 import { loginUser } from '../../actions/authAction';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-// import AsyncStorage from '@react-native-community/async-storage';
-// import {  } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { AsyncStorage } from 'react-native';
 
 
 const validationSchema = Yup.object({

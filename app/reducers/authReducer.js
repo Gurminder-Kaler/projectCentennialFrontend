@@ -9,12 +9,12 @@ export default (state = {}, action) => {
     case loginString:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.data,
       };
     case updateAuthUserString:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.data,
       };
     case getAllPatientsOfAUserString:
       return {
